@@ -26,9 +26,12 @@ export default defineComponent({
 				return;
 			}
 
-			if (this.isTotal) {
+			if (this.isProduct) {
+				wid = (this.stat / 2320812000000) * 100; //convert stat to width percent
+				else { if (this.isTotal) {
 				wid = (this.stat / 700) * 100; //convert stat to width percent
-			} else {
+			}
+			else {
 				wid = (this.stat / 180) * 100; //convert stat to width percent
 			}
 
@@ -68,6 +71,9 @@ export default defineComponent({
 			}
 			if (container && container.querySelector("#bar-tot")) {
 				container.classList.add("bar-tot-container");
+			}
+			if (container && container.querySelector("#bar-pro")) {
+				container.classList.add("bar-pro-container");
 			}
 		},
 	},
