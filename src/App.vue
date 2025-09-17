@@ -171,6 +171,14 @@ export default defineComponent({
 						@change="appConfig.saveShowTotal(graphState.showTotal)"
 						class="checkbox checkbox-primary"
 					/>
+				<label class="label cursor-pointer">
+					<span class="label-text">Show product</span>
+					<input
+						type="checkbox"
+						v-model="graphState.showProduct"
+						@change="appConfig.saveShowProduct(graphState.showProduct)"
+						class="checkbox checkbox-primary"
+					/>
 				</label>
 			</form>
 			<div
