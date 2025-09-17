@@ -84,6 +84,14 @@ export default defineComponent({
 				:stat="graphState.total"
 				:isTotal="true"
 			/>
+			<StatBar
+				v-show="graphState.showProduct"
+				class="pro-bar"
+				barId="bar-pro"
+				label="Product"
+				:stat="graphState.product"
+				:isProduct="true"
+			/>
 		</div>
 	</div>
 </template>
