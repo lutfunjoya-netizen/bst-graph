@@ -24,6 +24,8 @@ const spe = "#ec4899";
 const speContainer = barContainer;
 const tot = "#94a3b8";
 const totContainer = barContainer;
+const pro = "#ffd000";
+const proContainer = barContainer;
 
 // Dark colors
 const txtColorDark = "#fafafa";
@@ -46,6 +48,8 @@ const speDark = "#db2777";
 const speContainerDark = barContainerDark;
 const totDark = "#94a3b8";
 const totContainerDark = barContainerDark;
+const proDark = "#ffd000";
+const proContainerDark = barContainerDark;
 
 // Types
 const typeColors = {
@@ -113,6 +117,8 @@ function createTheme(genOpts, statOpts, typeOpts, isDarkTheme) {
 		".bar-spe-container": { "background-color": statOpts.speContainer },
 		"#bar-tot": { "background-color": statOpts.tot },
 		".bar-tot-container": { "background-color": statOpts.totContainer },
+		"#bar-pro": { "background-color": statOpts.pro },
+		".bar-pro-container": { "background-color": statOpts.proContainer },
 		".type-bug": {
 			"color": typeOpts.bug.text,
 			"background-color": typeOpts.bug.bg,
@@ -218,6 +224,8 @@ function lightTheme() {
 		speContainer: speContainer,
 		tot: tot,
 		totContainer: totContainer,
+		pro: pro,
+		proContainer: proContainer,
 	};
 
 	return createTheme(genOpts, statOpts, typeColors, false);
@@ -249,6 +257,8 @@ function darkTheme() {
 		speContainer: speContainerDark,
 		tot: totDark,
 		totContainer: totContainerDark,
+		pro: proDark,
+		proContainer: proContainerDark,
 	};
 
 	return createTheme(genOpts, statOpts, typeColors, true);
