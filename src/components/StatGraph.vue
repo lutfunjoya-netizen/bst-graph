@@ -84,6 +84,15 @@ export default defineComponent({
 				:stat="graphState.total"
 				:isTotal="true"
 			/>
+			<!-- This is the 'Product' bar you're asking for -->
+			<StatBar
+				v-show="graphState.showBaseStatProduct"
+				class="bsp-bar"
+				barId="bar-bsp"
+				label="Product"
+				:stat="graphState.baseStatProduct"
+				:isTotal="true"
+			/>
 		</div>
 	</div>
 </template>
