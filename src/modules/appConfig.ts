@@ -1,21 +1,16 @@
-// Handles saving and loading app settings
-
 import { graphState } from "./graphState";
 
-// Saves the PNG quality
 export function saveQuality(quality: number) {
 	localStorage.setItem("quality", String(quality));
 }
 
-// Saves whether dark mode is active
 export function saveTheme(dark: boolean) {
 	localStorage.setItem("dark", String(dark));
 }
 
-// Changes the theme
 export function changeTheme(darkMode: boolean) {
 	const html = document.documentElement;
-	html.removeAttribute("data-theme"); // remove previous theme
+	html.removeAttribute("data-theme");
 
 	if (darkMode) {
 		html.setAttribute("data-theme", "dark");
@@ -26,22 +21,23 @@ export function changeTheme(darkMode: boolean) {
 	saveTheme(darkMode);
 }
 
-// Saves whether the name should be shown
 export function saveShowName(showName: boolean) {
 	localStorage.setItem("showName", String(showName));
 }
 
-// Saves whether the types should be shown
 export function saveShowTypes(showTypes: boolean) {
 	localStorage.setItem("showTypes", String(showTypes));
 }
 
-// Saves whether the stat total should be shown
 export function saveShowTotal(showTotal: boolean) {
 	localStorage.setItem("showTotal", String(showTotal));
 }
 
-// Loads settings
+// NEW: Saves whether the Base Stat Product should be shown
+export function saveShowBaseStatProduct(showBaseStatProduct: boolean) {
+	localStorage.setItem("showBaseStatProduct", String(showBaseStatProduct));
+}
+
 export function loadSettings() {
 	const quality = localStorage.getItem("quality");
 	const dark = localStorage.getItem("dark");
@@ -49,28 +45,26 @@ export function loadSettings() {
 	const showName = localStorage.getItem("showName");
 	const showTypes = localStorage.getItem("showTypes");
 	const showTotal = localStorage.getItem("showTotal");
+	// NEW: Retrieve showBaseStatProduct from localStorage
+	const showBaseStatProduct = localStorage.getItem("showBaseStatProduct");
 
 	const qSel = document.getElementById("quality-select") as HTMLSelectElement;
 	const themeSw = document.getElementById("theme") as HTMLInputElement;
 
 	// ------Quality------
-	// Check if there's a saved setting for quality
 	if (quality !== null) {
-		qSel.value = quality; // Set the value of the quality selector
+		qSel.value = quality;
 	}
 
 	// ------Dark------
-	// Check if dark mode is true
-	// LocalStorage can only store strings, so booleans have to be converted first.
 	if (dark === "true") {
 		darkBool = true;
 	}
-	// Else, darkBool is already false.
 
-	changeTheme(darkBool); // Change theme
-	themeSw.checked = darkBool; // Check theme checkbox
+	changeTheme(darkBool);
+	themeSw.checked = darkBool;
 
-	// ------showName, showTypes, showTotal------
+	// ------showName, showTypes, showTotal, showBaseStatProduct------
 	// If each variable is undefined or null,
 	// graphState should be true because it hasn't been changed
 	// in local storage yet.
@@ -88,5 +82,11 @@ export function loadSettings() {
 		graphState.showTotal = false;
 	} else {
 		graphState.showTotal = true;
+	}
+	// NEW: Load setting for showBaseStatProduct
+	if (showBaseStatProduct === "false") {
+		graphState.showBaseStatProduct = false;
+	} else {
+		graphState.showBaseStatProduct = true;
 	}
 }
