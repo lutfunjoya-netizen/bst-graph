@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Styles for Base Stat Product (BSP) */
+.bsp-bar .stat-fill {
+  /* Example: Give the product bar a distinct background color */
+  /* You might need to adjust the class 'stat-fill' based on the internal structure of StatBar.vue */
+  /* If StatBar.vue already sets a background for ':isTotal="true"', you might need a more specific selector */
+  background-color: #6C5CE7; /* A distinct purple color */
+}
+
+/* You could also add other styles, e.g., for text color or font weight */
+/* .bsp-bar .stat-label,
+.bsp-bar .stat-value {
+  color: #6C5CE7;
+  font-weight: bold;
+} */
