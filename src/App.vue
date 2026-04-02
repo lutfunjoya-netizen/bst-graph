@@ -1,8 +1,6 @@
 <script lang="ts">
-// Vue
 import { defineComponent } from "vue";
 
-// Components
 import AppHeader from "./components/AppHeader.vue";
 import FormButton from "./components/FormButton.vue";
 import LabelInput from "./components/LabelInput.vue";
@@ -10,7 +8,6 @@ import NameInput from "./components/NameInput.vue";
 import StatGraph from "./components/StatGraph.vue";
 import TypeSelect from "./components/TypeSelect.vue";
 
-// Modules
 import * as appConfig from "./modules/appConfig";
 import { fetchStats } from "./modules/fetchStats";
 import { graphState } from "./modules/graphState";
@@ -29,16 +26,13 @@ export default defineComponent({
 	},
 	data() {
 		return {
-			// Manages the graph state
 			graphState,
-			// These don't work in the HTML without these lines
 			appConfig,
 			fetchStats,
 			outputImage,
 		};
 	},
 	methods: {
-		// When a stat changes
 		onNameChanged(value: string) {
 			graphState.setName(value);
 		},
@@ -65,7 +59,6 @@ export default defineComponent({
 		},
 	},
 	mounted: function () {
-		// On load
 		randomGraph();
 		appConfig.loadSettings();
 	},
@@ -172,6 +165,20 @@ export default defineComponent({
 						class="checkbox checkbox-primary"
 					/>
 				</label>
+				<!-- NEW: Checkbox for showing Base Stat Product -->
+				<label class="label cursor-pointer">
+					<span class="label-text">Show product</span>
+					<input
+						type="checkbox"
+						v-model="graphState.showBaseStatProduct"
+						@change="
+							appConfig.saveShowBaseStatProduct(
+								graphState.showBaseStatProduct
+							)
+						"
+						class="checkbox checkbox-primary"
+					/>
+				</label>
 			</form>
 			<div
 				class="panel flex-row grid grid-cols-2"
@@ -212,7 +219,6 @@ export default defineComponent({
 			</div>
 		</div>
 	</div>
-	<!-- Footer, probably -->
 </template>
 
 <style>
