@@ -16,63 +16,71 @@ export default defineComponent({
 		},
 	},
 	methods: {
-		// Adjusts the width of the stat bar
 		adjustBarWidth() {
 			const bar = document.getElementById(this.barId);
 			let wid = 0;
 
-			// Check whether the stat or bar is null because typescript kept yelling at me about it
 			if (this.stat === undefined || bar === undefined || bar === null) {
 				return;
 			}
 
 			if (this.isTotal) {
-				wid = (this.stat / 700) * 100; //convert stat to width percent
+				if (this.barId === "bar-tot") {
+					wid = (this.stat / 700) * 100;
+				} else if (this.barId === "bar-bsp") {
+					// Max Product Bar is (700/6)^6, floored
+					const MAX_PRODUCT_VALUE = Math.floor(Math.pow((700 / 6), 6));
+					wid = (this.stat / MAX_PRODUCT_VALUE) * 100;
+				}
 			} else {
-				wid = (this.stat / 180) * 100; //convert stat to width percent
+				wid = (this.stat / 180) * 100;
 			}
 
 			if (wid > 100) {
-				wid = 100; // Width cannot be more than 100%
+				wid = 100;
 			}
 
 			if (wid < 2) {
-				wid = 2; // Width cannot be less than 2%
+				wid = 2;
 			}
 
 			bar.style.width = String(wid) + "%";
 		},
 		changeContainerColor() {
-			// const container = document.querySelector(".bar-container");
-
 			const bar = document.getElementById(this.barId);
 			const container = bar?.parentElement;
 
-			if (container && container.querySelector("#bar-hp")) {
-				container.classList.add("bar-hp-container");
-			}
-			if (container && container.querySelector("#bar-att")) {
-				container.classList.add("bar-att-container");
-			}
-			if (container && container.querySelector("#bar-def")) {
-				container.classList.add("bar-def-container");
-			}
-			if (container && container.querySelector("#bar-spA")) {
-				container.classList.add("bar-spA-container");
-			}
-			if (container && container.querySelector("#bar-spD")) {
-				container.classList.add("bar-spD-container");
-			}
-			if (container && container.querySelector("#bar-spe")) {
-				container.classList.add("bar-spe-container");
-			}
-			if (container && container.querySelector("#bar-tot")) {
-				container.classList.add("bar-tot-container");
+			if (!container) return;
+
+			switch (this.barId) {
+				case "bar-hp":
+					container.classList.add("bar-hp-container");
+					break;
+				case "bar-att":
+					container.classList.add("bar-att-container");
+					break;
+				case "bar-def":
+					container.classList.add("bar-def-container");
+					break;
+				case "bar-spA":
+					container.classList.add("bar-spA-container");
+					break;
+				case "bar-spD":
+					container.classList.add("bar-spD-container");
+					break;
+				case "bar-spe":
+					container.classList.add("bar-spe-container");
+					break;
+				case "bar-tot":
+					container.classList.add("bar-tot-container");
+					break;
+				case "bar-bsp":
+					container.classList.add("bar-bsp-container");
+					break;
 			}
 		},
 	},
 	mounted: function () {
-		// On load
 		this.adjustBarWidth();
 		this.changeContainerColor();
 	},
@@ -111,12 +119,10 @@ export default defineComponent({
 
 .bar-container {
 	height: 1.7em;
-	/* padding: 0.1em; */
 }
 
 .label {
 	float: left;
-	/* padding-left: 1px !important; */
 }
 
 .stat {
@@ -130,8 +136,6 @@ export default defineComponent({
 }
 
 @media (min-width: 32rem) {
-	/* Change the label-to-bar ratio when on desktop */
-
 	.text-container {
 		@apply basis-1/3;
 	}
